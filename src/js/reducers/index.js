@@ -5,16 +5,13 @@ const initialState = {
 }
 
 function rootReducer (state = initialState, action) {
-
+  
     switch(action.type) {
-
         case ADD_ARTICLE: {
-            return [
-                ...state,
-                {
-                    articles: state.articles.concat(action.payload)
-                }
-            ]
+            return {
+            ...state,
+            articles: state.articles.concat(action.payload)   
+             }
         }
         default:
             return state;
