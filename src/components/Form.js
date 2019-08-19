@@ -20,6 +20,13 @@ class  ConnectedForm extends React.Component {
         const id = uuidv1();
         const { title } = this.state;
 
+        // const forbidenWords = ["spam", "money"];
+        // const foundWord = forbidenWords.filter(word => title.includes(word));
+
+        // if (foundWord) {
+        //     return this.props.titleForbiden();
+        // }
+
         this.props.addArticle({ id, title })
         this.setState({ title: ""})
     }
@@ -30,9 +37,10 @@ class  ConnectedForm extends React.Component {
 
 
     render() {
-        const { title } = this.state;
+    const { title } = this.state;
     return (
         <form onSubmit={this.submitHandler}>
+                {this.props.badWords && this.props.badWords}
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
@@ -55,7 +63,13 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
+const mapStateToProps = state => {
+    return {
+        badWords: state.badWords
+    }
+}
+
+const Form = connect(mapStateToProps, mapDispatchToProps)(ConnectedForm);
 
 export default Form;
 
