@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADED } from '../constants/action-types';
+import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_REQUESTED } from '../constants/action-types';
  
 export function addArticle(payload) {
     return {
@@ -15,12 +15,7 @@ export function foundBadWord(payload) {
 }
 
 export function getData() {
-    return function(dispatch) {
-        return fetch("https://jsonplaceholder.typicode.com/posts")
-        .then(response => response.json())
-        .then(data => {
-            dispatch({ type: DATA_LOADED, payload: data })
-        })
+    return {
+        type: DATA_REQUESTED
     }
-
 }
